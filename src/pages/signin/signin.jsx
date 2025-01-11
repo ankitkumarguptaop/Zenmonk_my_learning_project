@@ -10,37 +10,71 @@ import Thirdpartysignin from "../../components/third-party-logo-button/third-par
 import { useNavigate } from "react-router-dom";
 
 function Sigin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
+
+  // const [emailError, setEmailError] = useState(false);
+  // const [passwordError, setPasswordError] = useState(false);
+  const [error, setError] = useState({
+    emailError: false,
+    passwordError: false,
+  });
 
   const navigate = useNavigate();
 
   function handleEmail(e) {
-    setEmail(e.target.value);
+    setInput({
+      email: e.target.value,
+      password: input.password,
+    });
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setEmailError(true);
+    if (!emailPattern.test(input.email)) {
+      setError({
+        emailError: true,
+        passwordError: error.passwordError,
+      });
     } else {
-      setEmailError(false);
+      setError({
+        emailError: false,
+        passwordError: error.passwordError,
+      });
     }
     if (e.target.value.length <= 0) {
-      setEmailError(false);
+      setError({
+        emailError: false,
+        passwordError: error.passwordError,
+      });
     }
   }
 
   function handleSignin(e) {
-    setPassword(e.target.value);
+    setInput({
+      email: input.email,
+      password: e.target.value,
+    });
     var passwordPattern =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,16}$/;
-    if (!passwordPattern.test(password)) {
-      setPasswordError(true);
+    if (!passwordPattern.test(input.password)) {
+      setError({
+        emailError: error.emailError,
+        passwordError: true,
+      });
     } else {
-      setPasswordError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: false,
+      });
     }
     if (e.target.value.length <= 0) {
-      setPasswordError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: false,
+      });
     }
   }
 
@@ -50,22 +84,28 @@ function Sigin() {
     const passwordPattern =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 
- 
     //  if(!emailPattern.test(email)){
     //     alert("Please enter correct email");
     //   }
     //  if (!passwordPattern.test(password)) {
     //   alert("Please enter correct password");
     //  }
-     if(passwordPattern.test(password) && emailPattern.test(email)){
-      console.log("User Email id is :", email);
-      console.log("User Password is :", password);
+    if (
+      passwordPattern.test(input.password) &&
+      emailPattern.test(input.email)
+    ) {
+      console.log("User Email id is :", input.email);
+      console.log("User Password is :", input.password);
       alert(" User successfuly Sign in !");
-      navigate("/home", { state: [email, password] });
-      setEmailError(false);
-      setPasswordError(false);
-      setEmail("");
-      setPassword("");
+      navigate("/home", { state: [input.email, input.password] });
+      setError({
+        emailError: false,
+        passwordError: false,
+      });
+      setInput({
+        email: "",
+        password: "",
+      });
     }
   }
 
@@ -88,10 +128,10 @@ function Sigin() {
               <div className="email" id="email">
                 <Input
                   type="email"
-                  value={email}
+                  value={input.email}
                   placeHolder="example@gmail.com"
                   handleInput={handleEmail}
-                  error={emailError}
+                  error={error.emailError}
                   errorMessage="Please enter the valid Email ❌"
                   required={true}
                 />
@@ -102,10 +142,10 @@ function Sigin() {
               <div className="password" id="password">
                 <Input
                   type="password"
-                  value={password}
+                  value={input.password}
                   placeHolder="At least 8 Characters"
                   handleInput={handleSignin}
-                  error={passwordError}
+                  error={error.passwordError}
                   errorMessage="Password must greater than 8 and include all type of Leters ❌"
                   required={true}
                 />

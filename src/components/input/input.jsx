@@ -1,7 +1,15 @@
 import React from "react";
 import "./input.css";
 
-const Input = ({ type, handleInput, placeHolder, value, error,errorMessage ,required}) => {
+const Input = ({
+  type,
+  handleInput,
+  placeHolder,
+  value,
+  error,
+  errorMessage,
+  required,
+}) => {
   let name = "input-text";
   if (!error) {
     name = "input-text";
@@ -11,17 +19,15 @@ const Input = ({ type, handleInput, placeHolder, value, error,errorMessage ,requ
 
   return (
     <>
-    <input
-      type={type}
-      value={value}
-      className={name}
-      placeholder={placeHolder}
-      required={required}
-      onChange={(e) => handleInput(e)}
-    />
-    {
-       error && <div className="error-message">{errorMessage}</div>
-    }
+      <input
+        type={type}
+        value={value}
+        className={name}
+        placeholder={placeHolder}
+        required={required}
+        onChange={(e) => handleInput(e)}
+      />
+      {error && <div className="error-message">{errorMessage}</div>}
     </>
   );
 };

@@ -10,57 +10,113 @@ import google from "../../images/google.png";
 import facebook from "../../images/facebook.png";
 
 function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const [input,setInput]=useState({
-  //   email:"",
-  //   password:""
-  // })
-  const [name, setName] = useState("");
+  // dont use this
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
 
-  const [emailError, setEmailError] = useState(false);
-  const [nameError, setNameError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+
+  // const [emailError, setEmailError] = useState(false);
+  // const [nameError, setNameError] = useState(false);
+  // const [passwordError, setPasswordError] = useState(false);
+  const [error, setError] = useState({
+    emailError: false,
+    passwordError: false,
+    nameError: false,
+  });
 
   const navigate = useNavigate();
 
   function handleName(e) {
-    setName(e.target.value);
-    if (name.replace(/\s+/g, " ").trim().length < 0) {
-      setNameError(true);
+    // setName(e.target.value);
+    setInput({
+      email: input.email,
+      name: e.target.value,
+      password: input.password,
+    });
+    if (input.name.replace(/\s+/g, " ").trim().length < 0) {
+      setError({
+        emailError: error.emailError,
+        passwordError: error.passwordError,
+        nameError: true,
+      });
     } else {
-      setNameError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: error.passwordError,
+        nameError: false,
+      });
     }
     if (e.target.value.length <= 0) {
-      setNameError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: error.passwordError,
+        nameError: false,
+      });
     }
-
   }
 
   function handleEmail(e) {
-    setEmail(e.target.value);
+    setInput({
+      email: e.target.value,
+      name: input.name,
+      password: input.password,
+    });
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setEmailError(true);
+    if (!emailPattern.test(input.email)) {
+      setError({
+        emailError: true,
+        passwordError: error.passwordError,
+        nameError: error.nameError,
+      });
     } else {
-      setEmailError(false);
+      setError({
+        emailError: false,
+        passwordError: error.passwordError,
+        nameError: error.nameError,
+      });
     }
     if (e.target.value.length <= 0) {
-      setEmailError(false);
+      setError({
+        emailError: false,
+        passwordError: error.passwordError,
+        nameError: error.nameError,
+      });
     }
   }
 
   function handlePassword(e) {
-    setPassword(e.target.value);
+    setInput({
+      email: input.email,
+      name: input.name,
+      password: e.target.value,
+    });
     var passwordPattern =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,16}$/;
-    if (!passwordPattern.test(password)) {
-      setPasswordError(true);
+    if (!passwordPattern.test(input.password)) {
+      setError({
+        emailError: error.emailError,
+        passwordError: true,
+        nameError: error.nameError,
+      });
     } else {
-      setPasswordError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: false,
+        nameError: error.nameError,
+      });
     }
     if (e.target.value.length <= 0) {
-      setPasswordError(false);
+      setError({
+        emailError: error.emailError,
+        passwordError: false,
+        nameError: error.nameError,
+      });
     }
   }
 
@@ -70,29 +126,48 @@ function SignUp() {
     const passwordPattern =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 
-    if(!emailPattern.test(email)){
-      alert("please enter valid email ");
-      setEmailError(true);
-     }
-     if(name.replace(/\s+/g, " ").trim().length <= 0){
-      alert("please enter valid name ");
-      setNameError(true);
-     }
-     if(!passwordPattern.test(password) ){
-      alert("please enter valid password ");
-      setPasswordError(true);
-     }
-     if(passwordPattern.test(password) && name.replace(/\s+/g, " ").trim().length > 0 && emailPattern.test(email)){
+    if (!emailPattern.test(input.email)) {
+      alert("please enter valid entry ");
+      setError({
+        emailError: true,
+        passwordError: error.passwordError,
+        nameError: error.nameError,
+      });
+    }
+    if (input.name.replace(/\s+/g, " ").trim().length <= 0) {
+      alert("please enter valid entry ");
+      setError({
+        emailError: error.emailError,
+        passwordError: error.passwordError,
+        nameError: true,
+      });
+    }
+    if (!passwordPattern.test(input.password)) {
+      alert("please enter valid entry ");
+      setError({
+        emailError: error.emailError,
+        passwordError: true,
+        nameError: error.nameError,
+      });
+    }
+    if (
+      passwordPattern.test(input.password) &&
+      input.name.replace(/\s+/g, " ").trim().length > 0 &&
+      emailPattern.test(input.email)
+    ) {
       alert("User Successfuly Signup!");
-      setEmailError(false);
-      setPasswordError(false);
-      setNameError(false);
+      setError({
+        emailError: false,
+        passwordError: false,
+        nameError: false,
+      });
       navigate("/");
-      setEmail("");
-      setPassword("");
-      setName("");
-     }
-
+      setInput({
+        email: "",
+        password: "",
+        name: "",
+      });
+    }
   }
 
   return (
@@ -114,10 +189,10 @@ function SignUp() {
               <div className="name" id="name">
                 <Input
                   type="text"
-                  value={name}
+                  value={input.name}
                   placeHolder="Please enter your name"
                   handleInput={handleName}
-                  error={nameError}
+                  error={error.nameError}
                   errorMessage="Please Enter Valid Name ❌"
                   required={true}
                 />
@@ -129,10 +204,10 @@ function SignUp() {
               <div className="email" id="email">
                 <Input
                   type="email"
-                  value={email}
+                  value={input.email}
                   placeHolder="example@gmail.com"
                   handleInput={handleEmail}
-                  error={emailError}
+                  error={error.emailError}
                   errorMessage="Please enter the valid Email ❌"
                   required={true}
                 />
@@ -143,10 +218,10 @@ function SignUp() {
               <div className="password" id="password">
                 <Input
                   type="password"
-                  value={password}
+                  value={input.password}
                   placeHolder="At least 8 Characters"
                   handleInput={handlePassword}
-                  error={passwordError}
+                  error={error.passwordError}
                   errorMessage="Password must greater than 8 and include all type of Leters ❌"
                   required={true}
                 />

@@ -52,7 +52,7 @@ function Sigin() {
     }
   }
 
-  function handleSignin(e) {
+  function handlePassword(e) {
     setInput({
       email: input.email,
       password: e.target.value,
@@ -82,31 +82,42 @@ function Sigin() {
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern =
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,16}$/;
 
-    //  if(!emailPattern.test(email)){
-    //     alert("Please enter correct email");
-    //   }
-    //  if (!passwordPattern.test(password)) {
-    //   alert("Please enter correct password");
-    //  }
-    if (
-      passwordPattern.test(input.password) &&
-      emailPattern.test(input.email)
-    ) {
-      console.log("User Email id is :", input.email);
-      console.log("User Password is :", input.password);
-      alert(" User successfuly Sign in !");
-      navigate("/home", { state: [input.email, input.password] });
-      setError({
-        emailError: false,
-        passwordError: false,
-      });
-      setInput({
-        email: "",
-        password: "",
-      });
-    }
+     if(!emailPattern.test(input.email)){
+        alert("Please enter correct email");
+      }
+     if (!passwordPattern.test(input.password)) {
+      alert("Please enter correct password");
+     }
+
+
+    const data =JSON.parse(localStorage.getItem(input.email));
+    
+       if(data && data.email===input.email && data.password===input.password){
+        console.log("User Email id is :", input.email);
+        console.log("User Password is :", input.password);
+  
+        alert(" User successfuly Sign in !");
+        navigate("/home", { state: [input.email, input.password , data.name] });
+        setError({
+          emailError: false,
+          passwordError: false,
+        });
+        setInput({
+          email: "",
+          password: "",
+        });
+       }
+       else{
+        alert("Need to register first!")
+       }
+    
+
+    // if (passwordPattern.test(input.password) && emailPattern.test(input.email)) {
+         
+
+    // }
   }
 
   return (
@@ -144,7 +155,7 @@ function Sigin() {
                   type="password"
                   value={input.password}
                   placeHolder="At least 8 Characters"
-                  handleInput={handleSignin}
+                  handleInput={handlePassword}
                   error={error.passwordError}
                   errorMessage="Password must greater than 8 and include all type of Leters ❌"
                   required={true}

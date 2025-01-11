@@ -124,7 +124,7 @@ function SignUp() {
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern =
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,16}$/;
 
     if (!emailPattern.test(input.email)) {
       alert("please enter valid entry ");
@@ -161,12 +161,24 @@ function SignUp() {
         passwordError: false,
         nameError: false,
       });
+
+
+
+
+      localStorage.setItem( input.email , JSON.stringify({
+        email: input.email,
+        password:input.password,
+        name: input.name,
+        todos:[]
+      }))
+
       navigate("/");
       setInput({
         email: "",
         password: "",
         name: "",
       });
+
     }
   }
 

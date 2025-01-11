@@ -1,0 +1,28 @@
+.signin-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.signin-btn button{ 
+    font-size: 16px;
+    color: #313957;
+    padding-bottom: 10px;
+    margin-top: 15px;
+    background-color: #F3F9FA;
+    border: 1px solid ;
+    border-style: none;
+    border-radius: 12px;
+    height: 40px;
+    width: 348px;
+    margin-right: 6px;
+}
+
+
+.signin-btn button img{
+    margin-right: 10px;
+    margin-bottom: -8px;
+    height: 30px;
+    width: 30px;
+}

@@ -12,8 +12,6 @@ const Home = () => {
   const [todo , setTodo]=useState("");
 
 
-
-   
   function handleTodo(e){
     setTodo(e.target.value);
   }
@@ -26,14 +24,16 @@ const Home = () => {
   
 
   function handleDelete(index){
-    console.log(index);
     data.todos.splice(index,1);
     setTodos(data.todos);
     localStorage.setItem(state[0],JSON.stringify( { email:data.email,password:data.password,name:data.name,"todos":data.todos}))
   }
  
   function handleEdit(index){
-
+    setTodo(data.todos[index]);
+    
+    localStorage.setItem(state[0],JSON.stringify( { email:data.email,password:data.password,name:data.name,"todos":data.todos}))
+      
   }
 
 

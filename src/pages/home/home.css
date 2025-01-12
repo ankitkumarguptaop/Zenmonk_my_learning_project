@@ -10,14 +10,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
+}
+
+
+.todo-rapper{
+    display: flex;
+    flex-direction:column;
+    height:70vh;
+    width:60vw;
+    background-color: aqua;
+    height: auto;
 }
 
 .single-todo{
+    display: inline-block;
+    background-color: rgb(160, 176, 176);
     margin-top: 1px;
-    padding: 5px;
+    padding: 6px;
     border: 1px solid black;
-    border-radius: 2px;
-    height: 100xp;
-    width: 500px;
+    border-radius: 5px;
+    height: 25px;
+    width: 400px;
+}
+
+.todo-component-button{
+    margin-left: 5px;
+    padding: 9px;
+    border-radius: 5px;
+    background-color: #162D3A;
+    color: #FFFFFF;
 }

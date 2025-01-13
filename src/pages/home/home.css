@@ -1,42 +1,51 @@
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-
-.home-container{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.home-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-.todo-rapper{
-    display: flex;
-    flex-direction:column;
-    height:70vh;
-    width:60vw;
-    background-color: aqua;
-    height: auto;
+.todo-rapper {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+  width: 60vw;
+  background-color: aqua;
+  height: auto;
 }
 
-.single-todo{
-    display: inline-block;
-    background-color: rgb(160, 176, 176);
-    margin-top: 1px;
-    padding: 6px;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 25px;
-    width: 400px;
+.single-todo {
+  display: inline-block;
+  background-color: rgb(160, 176, 176);
+  margin-top: 2px;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 25px;
+  width: 400px;
 }
 
-.todo-component-button{
-    margin-left: 5px;
-    padding: 9px;
-    border-radius: 5px;
-    background-color: #162D3A;
-    color: #FFFFFF;
+.todo-component-button {
+  margin-left: 5px;
+  padding: 9px;
+  border-radius: 5px;
+  background-color: #162d3a;
+  color: #ffffff;
+}
+
+.single-todo span {
+  display: inline-block;
+  height: 25px;
+  width: 20px;
+
+  text-align: center;
+  background-color: rgb(23, 23, 53);
+  color: white;
 }

@@ -92,13 +92,15 @@ function Sigin() {
      }
 
 
-    const data =JSON.parse(localStorage.getItem(input.email));
+      const data =JSON.parse(localStorage.getItem(input.email));
     
        if(data && data.email===input.email && data.password===input.password){
         console.log("User Email id is :", input.email);
         console.log("User Password is :", input.password);
   
         alert(" User successfuly Sign in !");
+        localStorage.setItem( "current-user" , JSON.stringify(
+          data.email))
         navigate("/home", { state: [input.email, input.password , data.name] });
         setError({
           emailError: false,
@@ -159,7 +161,8 @@ function Sigin() {
                   error={error.passwordError}
                   errorMessage="Password must greater than 8 and include all type of Leters ❌"
                   required={true}
-                />
+
+                ></Input>
                 <div className="forgot-link">
                   <a href="./">Forgot Password?</a>
                 </div>

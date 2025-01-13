@@ -1,25 +1,19 @@
-.input-error{
- border: 2px solid red ;
- margin-top: 5px;
- width: 350px;
- height:35px;
- border-radius: 12px;
-
- /* border: 1px solid #D4D7E3; */
+.input-error {
+  border: 2px solid red;
+  margin-top: 5px;
+  width: 350px;
+  height: 35px;
+  border-radius: 12px;
   padding-left: 10px;
-  color: #8897AD;
-  background-color:#F7FBFF ;
-
+  color: #8897ad;
+  background-color: #f7fbff;
 }
-
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
-
-.error-message{
-  /* border: 2px solid red ; */
+.error-message {
   color: red;
   height: 25px;
   width: 350px;

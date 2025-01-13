@@ -162,23 +162,28 @@ function SignUp() {
         nameError: false,
       });
 
+      localStorage.setItem(
+        input.email,
+        JSON.stringify({
+          email: input.email,
+          password: input.password,
+          name: input.name,
+          // todos:[]
+        })
+      );
 
-
-
-      localStorage.setItem( input.email , JSON.stringify({
-        email: input.email,
-        password:input.password,
-        name: input.name,
-        todos:[]
-      }))
-
+      localStorage.setItem(
+        `${input.email}-todo`,
+        JSON.stringify({
+          todos: [],
+        })
+      );
       navigate("/");
       setInput({
         email: "",
         password: "",
         name: "",
       });
-
     }
   }
 
